@@ -1,2 +1,2 @@
 # PADC-SFC-News
-Walk-through on Android Seven Fundamental Components.
+This project is added persistence layer into PADC-SFC-News.
