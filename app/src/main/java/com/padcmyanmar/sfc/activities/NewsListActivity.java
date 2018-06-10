@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.padcmyanmar.sfc.R;
 import com.padcmyanmar.sfc.SFCNewsApp;
@@ -18,21 +19,27 @@ import com.padcmyanmar.sfc.adapters.NewsAdapter;
 import com.padcmyanmar.sfc.components.EmptyViewPod;
 import com.padcmyanmar.sfc.components.SmartRecyclerView;
 import com.padcmyanmar.sfc.components.SmartScrollListener;
+import com.padcmyanmar.sfc.data.models.NewsModel;
+import com.padcmyanmar.sfc.data.vo.NewsVO;
 import com.padcmyanmar.sfc.delegates.NewsItemDelegate;
 import com.padcmyanmar.sfc.events.RestApiEvents;
 import com.padcmyanmar.sfc.events.TapNewsEvent;
+import com.padcmyanmar.sfc.persistence.AppDatabase;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewsListActivity extends BaseActivity
         implements NewsItemDelegate {
+
+    NewsModel newsModel;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -55,6 +62,11 @@ public class NewsListActivity extends BaseActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        newsModel = NewsModel.getInstance();
+//        newsModel.initDatabase(this);
+//        newsModel.startLoadingMMNews();
+//        NewsModel.getInstance().startLoadingMMNews();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +174,14 @@ public class NewsListActivity extends BaseActivity
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNewsDataLoaded(RestApiEvents.NewsDataLoadedEvent event) {
-        mNewsAdapter.appendNewData(event.getLoadNews());
+//        List<NewsVO> list = AppDatabase.getNewsDatabase(this).newsDao().getAllNews();
+//        if (list.size() > 0) {
+//            mNewsAdapter.appendNewData(list);
+//            Toast.makeText(this, "get data from database", Toast.LENGTH_SHORT).show();
+//        } else {
+            mNewsAdapter.appendNewData(event.getLoadNews());
+//            Toast.makeText(this, "get data from network", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

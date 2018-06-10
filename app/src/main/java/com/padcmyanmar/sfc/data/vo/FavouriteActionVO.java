@@ -10,28 +10,24 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 import com.padcmyanmar.sfc.persistence.typeconverters.ActedUserTypeConverter;
-import com.padcmyanmar.sfc.persistence.typeconverters.CommentTypeConverter;
+import com.padcmyanmar.sfc.persistence.typeconverters.FavouriteTypeConverter;
 
 /**
  * Created by aung on 12/3/17.
  */
-
-@Entity(tableName = "comments", foreignKeys = {
+@Entity(tableName = "favourites", foreignKeys = {
         @ForeignKey(entity = ActedUserVO.class, parentColumns = "userId", childColumns = "acted_user_id", deferred = true)
 })
 
-public class CommentActionVO {
+public class FavouriteActionVO {
 
     @PrimaryKey
     @NonNull
-    @SerializedName("comment-id")
-    private String commentId;
+    @SerializedName("favorite-id")
+    private String favoriteId;
 
-    @SerializedName("comment")
-    private String comment;
-
-    @SerializedName("comment-date")
-    private String commentDate;
+    @SerializedName("favorite-date")
+    private String favoriteDate;
 
     @Ignore
     @SerializedName("acted-user")
@@ -46,28 +42,20 @@ public class CommentActionVO {
         return null;
     }
 
-    public String getCommentId() {
-        return commentId;
+    public String getFavoriteId() {
+        return favoriteId;
     }
 
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
+    public void setFavoriteId(String favoriteId) {
+        this.favoriteId = favoriteId;
     }
 
-    public String getComment() {
-        return comment;
+    public String getFavoriteDate() {
+        return favoriteDate;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getCommentDate() {
-        return commentDate;
-    }
-
-    public void setCommentDate(String commentDate) {
-        this.commentDate = commentDate;
+    public void setFavoriteDate(String favoriteDate) {
+        this.favoriteDate = favoriteDate;
     }
 
     public ActedUserVO getActedUser() {

@@ -1,7 +1,10 @@
 package com.padcmyanmar.sfc.network.reponses;
 
+import android.arch.persistence.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
 import com.padcmyanmar.sfc.data.vo.NewsVO;
+import com.padcmyanmar.sfc.persistence.typeconverters.NewsTypeConverter;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -11,7 +14,7 @@ import java.util.List;
 /**
  * Created by aung on 12/3/17.
  */
-
+@TypeConverters(NewsTypeConverter.class)
 public class GetNewsResponse {
 
     @SerializedName("code")
